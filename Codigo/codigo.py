@@ -32,7 +32,7 @@ while True :
 
         if maximo_saque == 3:
             print(" ")
-            print("Não é possível fazer mais saques, você atingiu a máximo diário!")
+            print("Não é possível fazer mais saques, você atingiu a quantidade máxima diário!")
             break
 
         if operacao_2 == "s":

@@ -31,6 +31,10 @@ while True:
             continue
 
     elif opcao == "s":
+
+        if numero_de_saques >= 3:
+            print("-> Número de saques excedido!")
+            continue
         valor_sacado = float(input("Digite o quanto você deseja sacar: "))
         
         if valor_sacado > saldo:
@@ -39,7 +43,9 @@ while True:
         elif valor_sacado <= 0:
             print("-> Insira um valor válido!")
             continue
-        else:
+        elif valor_sacado > 500:
+            print("-> O valor máximo é de R$500.00, insira um valor válido!")
+        elif valor_sacado <= 500:
             print("-> O valor foi sacado!")
             numero_de_saques += 1
             saldo -= valor_sacado

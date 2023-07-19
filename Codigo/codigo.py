@@ -1,99 +1,74 @@
-MENU = input("""             ================ MENU ================
+menu = ("""
+        =========================== MENU ===========================
              
- Digite (s) para sacar;
- Digite (d) para depositar;
- Digite (e) para mostrar o extrato;
- Digite (q) para sair.
+(d) depositar
+(s) sacar
+(e) extrato
+(q) sair
 
- """)
-deposito = 0.0
-saque = 0.0
-saldo = 15000.0
-maximo_saque = 0
+=>  """)
 
-while True :
-    print(MENU)
-    
+numero_de_saques = 0
+valor_do_saque = 0
+deposito = 0
+# extrato = " "
+saldo = 10000
 
+while True:
 
-    if MENU == "s":
-        operacao_1 = (float(input("Digite o valor que você quer sacar (até 500 reais): ")))
-        print(operacao_1)
-        saque += operacao_1
+    opcao = input(menu)
 
-        if operacao_1 > 500: 
-            print("O valor máximo permitido é 500!")
+    if opcao == "d":
+        valor_deposito = float(input("Digite o quanto você deseja depositar: "))
+
+        if valor_deposito > 0:
+            print(f"-> O valor de R${valor_deposito} foi depositado")
+            deposito += valor_deposito
+            saldo += valor_deposito
             continue
-
-        if operacao_1 <= 500:
-           operacao_2 = (str(input("Deseja fazer mais algum saque?(s/n)")))
-           print(operacao_2)
-        maximo_saque += 1
-
-        if maximo_saque == 3:
-            print(" ")
-            print("Não é possível fazer mais saques, você atingiu a quantidade máxima diário!")
-            break
-
-        if operacao_2 == "s":
-            continue
-
-        elif operacao_2 == "n" and maximo_saque == 3:
-            break
         else:
-             print("Por favor, insira um valor válido.")
-        
-        
-        continue
-    
-        
-
-
-
-    elif MENU == "d":
-        operacao_1 = (float(input("Digite o valor que você deseja depositar: ")))
-        print(f" R${operacao_1:.2f}")     
-        deposito += operacao_1  
-
-        if operacao_1 > 0:
-            print("")
-            print("O valor foi depositado!")
-            break
-
-        else: 
-            print("")
-            print("Por favor insira um valor válido")
+            print("(-> Insira um valor válido!)")
             continue
 
+    elif opcao == "s":
+        valor_sacado = float(input("Digite o quanto você deseja sacar: "))
         
-    elif MENU == "e":
-        print(f"O seu saldo é de: R${saldo:.2f}")
+        if valor_sacado > saldo:
+            print("-> Saldo insuficiente. Insira um valor válido!")
+            continue
+        elif valor_sacado <= 0:
+            print("-> Insira um valor válido!")
+            continue
+        else:
+            print("-> O valor foi sacado!")
+            numero_de_saques += 1
+            saldo -= valor_sacado
+            valor_do_saque += valor_sacado
+            continue
+
+    elif opcao == "e":
+        print("         ================== Extrato ==================")
+        print("")
+        print(f"saldo: R${saldo:.2f}")
+        print(f"depósito: R${deposito:.2f}")
+        print(f"saque: R${valor_do_saque:.2f}")
+        print("")
+
+        opcao_2 = str(input("Deseja sair do programa?(s/n) => "))
+        if opcao_2 == "s":
+            break
+        elif opcao_2 == "n":
+            continue
+        else:
+            break
+
+    elif opcao == "q":
         break
-    
-            
-
-    elif MENU == "q":
-        break
-
-
 
     else:
-        print("Não foi possível realizar processo algum.")
-        break
-print(" ")
-saldo = saldo - saque + deposito
-print(" ")
-print('volte sempre!')
-print(" ")
-print(f"""
-           =============== SAQUE ===============
-      
-                        R${saque:.2f}
+        print("-> Insira uma letra válida!")
+        continue
 
-           =============== DEPÓSITO ===============
-
-                        R${deposito:.2f}
-
-           =============== SALDO ===============
-
-                        R${saldo:.2f}""")
+print("")
+print("Volte sempre!")
+print("")
